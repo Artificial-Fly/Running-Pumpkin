@@ -28,23 +28,20 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Control(0);
-        if(!gameManager.isGameRunning){playerAnim.speed = 0;}else{playerAnim.speed = 1;}
-    }
-    public void Control(int commandIndex=0){
         if(gameManager.isGameRunning){
-            if((Input.GetKeyDown(KeyCode.UpArrow)||Input.GetKeyDown(KeyCode.W)||commandIndex==8)&&!(isDashing||isJumping)&&(!isDead)){
+            if((Input.GetKeyDown(KeyCode.UpArrow)||Input.GetKeyDown(KeyCode.W))&&!(isDashing||isJumping)&&(!isDead)){
                 StartCoroutine(JumpAction());
-            }else if((Input.GetKeyDown(KeyCode.DownArrow)||Input.GetKeyDown(KeyCode.S)||commandIndex==2)&&!(isDashing||isJumping)&&(!isDead)){
+            }else if((Input.GetKeyDown(KeyCode.DownArrow)||Input.GetKeyDown(KeyCode.S))&&!(isDashing||isJumping)&&(!isDead)){
                 StartCoroutine(DashAction());
-            }else if((Input.GetKeyDown(KeyCode.RightArrow)||Input.GetKeyDown(KeyCode.D)||commandIndex==6)&&transform.position.x<(horizontalLimit)&&(!isDead)){
+            }else if((Input.GetKeyDown(KeyCode.RightArrow)||Input.GetKeyDown(KeyCode.D))&&transform.position.x<(horizontalLimit)&&(!isDead)){
                 MoveSource.Play();
                 transform.Translate(Vector3.right*1.5f);
-            }else if((Input.GetKeyDown(KeyCode.LeftArrow)||Input.GetKeyDown(KeyCode.A)||commandIndex==4)&&transform.position.x>(-horizontalLimit)&&(!isDead)){
+            }else if((Input.GetKeyDown(KeyCode.LeftArrow)||Input.GetKeyDown(KeyCode.A))&&transform.position.x>(-horizontalLimit)&&(!isDead)){
                 MoveSource.Play();
                 transform.Translate(Vector3.right*(-1.5f));
             }
         }
+        if(!gameManager.isGameRunning){playerAnim.speed = 0;}else{playerAnim.speed = 1;}
     }
     public bool checkJump(){
         return isJumping;
